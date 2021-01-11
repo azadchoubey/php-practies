@@ -19,9 +19,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">   
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">easyNote</a>
+            <a class="navbar-brand" href="curd.php">easyNote</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,12 +51,7 @@ $sno=$_POST['snoEdit'];
 $title=$_POST['titleEdit'];
 $note=$_POST['noteEdit'];
 
-$server="localhost";
-$database="notes";
-$username="root";
-$password="";
-$conn=mysqli_connect($server,$username,$password,$database);
-
+require 'db_config.php';
 $sql ="UPDATE `$database` SET `Title` = '$title' ,  `note` = '$note' , `time` = CURRENT_TIMESTAMP WHERE `notes`.`Sno` = '$sno'";  
 $RESULT= mysqli_query($conn, $sql);
 
@@ -81,11 +76,7 @@ elseif(isset($_POST['delNotes'])){
     $title=$_POST['delTitle'];
     $note=$_POST['delnote'];
     
-    $server="localhost";
-    $database="notes";
-    $username="root";
-    $password="";
-    $conn=mysqli_connect($server,$username,$password,$database);
+    require 'db_config.php';
     
     $sql = "DELETE FROM `notes` WHERE `notes`.`Sno` = '$sno';";
     $RESULT= mysqli_query($conn, $sql);
@@ -107,15 +98,12 @@ elseif(isset($_POST['delNotes'])){
     }
     
 else{
-$server="localhost";
-$database="notes";
-$username="root";
-$password="";
+
 $title=$_POST['title'];
 $note=$_POST['note'];
 
 
-$conn=mysqli_connect($server,$username,$password,$database);
+require 'db_config.php';
 
 $sql ="INSERT INTO `notes` (`Sno`, `Title`, `note`, `time`) VALUES (NULL, '$title', '$note', CURRENT_TIMESTAMP);";
   
@@ -137,8 +125,18 @@ else{
   }
 
 
+}}
+if(isset($_POST['upload']))
+{
+    require 'upload.php'; 
+
 }
-}
+
+
+
+
+
+
 
 ?>
 
@@ -153,20 +151,23 @@ else{
         <div class="mb-3">
             <form action="curd.php" method="POST">
                 <label for="exampleFormControlInput1" class="form-label">Add Title</label>
-                <input type="text" class="form-control" id="title" name="title"><br>
+                <input type="text" class="form-control" id="title" name="title" required><br>
                 <label for="exampleFormControlTextarea1" class="form-label"> Take Note</label>
-                <textarea class="form-control" id="note" name="note" rows="3"></textarea><br>
-
+                <textarea class="form-control" id="note" name="note" rows="3" required></textarea><br>
+               
                 <input type="submit" class="btn btn-primary" value="Submit"></button>
             </form>
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+  Select image to upload:
+
+  <input type="file" class="btn btn-primary" name="fileToUpload" id="fileToUpload">
+  <input type="submit" class="btn btn-primary"value="Upload Image" name="upload">
+  </form>
         </div>
     </div>
+    <hr>
     <?php
-$server="localhost";
-$database="notes";
-$username="root";
-$password="";
- $conn=mysqli_connect($server,$username,$password,$database);
+require 'db_config.php';
 $dis = "SELECT * FROM `$database`";
 $disply = mysqli_query($conn, $dis);
 if (mysqli_num_rows($disply) > 0) {
@@ -317,23 +318,9 @@ if (mysqli_num_rows($disply) > 0) {
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    -->
-
-    <script>
-    $(document).ready(function() {
-
-    $(".btn").click(function() {
-        $("#myModal").modal('show');
-    });
+    --> </script>
 
 
-
-
-
-
-
-    })
-    </script>
 </body>
 
 </html>
