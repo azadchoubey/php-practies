@@ -1,28 +1,34 @@
 <?php
+session_start();
+  
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $username=$_POST['username'];
-    $password=$_POST['password'];
+    $user=$_POST['username'];
+    $pass=$_POST['password'];
 
     $server="localhost";
 $database="login";
 $username="root";
 $password="";
 $conn=mysqli_connect($server,$username,$password,$database);
-
-$sql = "SELECT * FROM `login` WHERE `Username`='$username';" ;
+$sql = "SELECT * FROM `user` WHERE `Username`='$user' AND `Password`='$pass'";
 $RESULT= mysqli_query($conn, $sql);
-if(!$RESULT)
-{   
-   
-    header('LOCATION:curd.php');
+
+$numrows = mysqli_num_rows($RESULT);
+
+if ($numrows > 0){
+
+ 
+      header("Location:curd.php");
+      $_SESSION["username"] = $user;
 }
 else{
     echo"invaild login details";
     
 }
 
-
 }
+
 
 
 ?>

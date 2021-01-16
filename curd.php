@@ -1,4 +1,13 @@
-
+<?php
+      session_start();
+      if(!isset($__SESSION["username"])){
+        echo "welcome ". $_SESSION["username"];
+        
+     }
+     else {
+        header("Location:login.php");
+     }
+?>
 <!DOCTYPE html>
 
 <head>
@@ -32,10 +41,10 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Features</a>
+                        <a class="nav-link active" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">About</a>
+                        <a class="nav-link active" href="logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -43,8 +52,11 @@
     </nav>
 
     <?php
-
+ 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+  
+    
 if(isset($_POST['snoEdit'])){
 //update the records
 $sno=$_POST['snoEdit'];
