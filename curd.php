@@ -1,13 +1,4 @@
-<?php
-      session_start();
-      if(!isset($__SESSION["username"])){
-        echo "welcome ". $_SESSION["username"];
-        
-     }
-     else {
-        header("Location:login.php");
-     }
-?>
+
 <!DOCTYPE html>
 
 <head>
@@ -22,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
     </script>
-
+<link rel="stylesheet" href="sty.css" >
     <title>easyNote!</title>
     </script>
 </head>
@@ -47,16 +38,26 @@
                         <a class="nav-link active" href="logout.php">Logout</a>
                     </li>
                 </ul>
+                <?php  session_start();
+    
+
+                echo " <h5 class='variablecolor'> <center> Welcome ".$_SESSION["username"]." </center></h5>";
+                ?>
             </div>
+           
         </div>
+      
+            
     </nav>
 
-    <?php
- 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-  
     
+    <?php
+ if (!isset($_SESSION["username"])){
+    header("Location:login.php");
+ }
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 if(isset($_POST['snoEdit'])){
 //update the records
 $sno=$_POST['snoEdit'];
@@ -108,7 +109,111 @@ elseif(isset($_POST['delNotes'])){
       </div>";
       }
     }
+    elseif(isset($_POST['upload']))
+    {
     
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    
+    
+    // Check if image file is a actual image or fake image
+    
+      if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+ 
+        $uploadOk = 1;
+   
+    
+      } else {
+    //     echo"
+    //   <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+    //   <center><strong>File is not an image. ! </strong> </center>
+    //   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    //   </div>";
+
+
+        echo "File is not an image.";
+        $uploadOk = 0; 
+      }
+        if (file_exists($target_file)) {
+
+    //         echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+    //   <center><strong>Sorry, file already exists. ! </strong> </center>
+    //   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    //   </div>";
+
+         echo "Sorry, file already exists.";
+          $uploadOk = 0;
+        
+        
+        }
+
+        // Check file size
+         
+        if ( $_FILES["fileToUpload"]["size"] > 500000) {
+            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            // <center><strong>Sorry, your file is too large. ! </strong> </center>
+            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            // </div>";
+      
+         
+           echo "Sorry, your file is too large.";
+          $uploadOk = 0;
+        
+        
+        }
+        
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            // <center><strong>Sorry, only JPG, JPEG, PNG & GIF files are allowed.! </strong> </center>
+            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            // </div>";
+
+
+         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+          $uploadOk = 0;
+        
+        
+        }
+        
+        // Check if $uploadOk is set to 0 by an error
+        elseif ($uploadOk == 0) {
+            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            // <center><strong>Sorry, your file was not uploaded.! </strong> </center>
+            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            // </div>";
+         echo "Sorry, your file was not uploaded.";
+        
+        
+        // if everything is ok, try to upload file
+        } else {
+          if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        //     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+        // <center><strong>Success!</strong> The file -". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"]))."has been uploaded.</center>
+        // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        // </div>";
+
+           
+           echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+        
+        
+          } else {
+            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            // <center><strong>Sorry, there was an error uploading your file.! </strong> </center>
+            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            // </div>";
+           
+           echo "Sorry, there was an error uploading your file.";
+        
+        
+          }
+        }
+    } 
 else{
 
 $title=$_POST['title'];
@@ -138,17 +243,6 @@ else{
 
 
 }}
-if(isset($_POST['upload']))
-{
-    require 'upload.php'; 
-
-}
-
-
-
-
-
-
 
 ?>
 
@@ -169,7 +263,7 @@ if(isset($_POST['upload']))
                
                 <input type="submit" class="btn btn-primary" value="Submit"></button>
             </form>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <form action="curd.php" method="post" enctype="multipart/form-data">
   Select image to upload:
 
   <input type="file" class="btn btn-primary" name="fileToUpload" id="fileToUpload">
@@ -185,11 +279,11 @@ $disply = mysqli_query($conn, $dis);
 if (mysqli_num_rows($disply) > 0) {
   $sno=0;
   ?>
-    <table id="table" class="display">
+    <table id="table" class="table-primary">
         <thead>
-            <tr>
+            <tr class="table-primary">
                 <th>Sno</th>
-                <th>Title</th>
+                <th>Title</th>  
                 <th>Notes</th>
                 <th>Time</th>
                 <th>Action</th>
@@ -201,11 +295,11 @@ if (mysqli_num_rows($disply) > 0) {
       $sno+1;
       $sno++;?>
             <tr>
-                <td> <?php echo $sno ?> </td></strong>
-                <td><?php echo $row['Title'];?> </td>
-                <td><?php echo $row['note'];?> </td>
-                <td><?php echo $row['time'];?> </td>
-                <td> <button type="button" id='  <?php echo $row['Sno'];?> ' class=" edit btn btn-primary" data-bs-toggle="modal"
+                <td class="table-primary"> <?php echo $sno ?> </td></strong>
+                <td class="table-primary"><?php echo $row['Title'];?> </td>
+                <td class="table-primary"><?php echo $row['note'];?> </td>
+                <td class="table-primary" ><?php echo $row['time'];?> </td>
+                <td class="table-primary"> <button type="button" id='  <?php echo $row['Sno'];?> ' class=" edit btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
                     <button type="button" class=" delete btn btn-primary"  id=' <?php echo $row['Sno'];?> ' data-bs-toggle="modal" data-bs-target="#exampleModal2"
                         data-bs-whatever="@getbootstrap">Delete</button>
@@ -292,7 +386,7 @@ if (mysqli_num_rows($disply) > 0) {
             Note= tr.getElementsByTagName("td")[2].innerText;
             console.log(title,Note);
             titleEdit.value=title;
-            noteEdit.value=title;
+            noteEdit.value=Note;
             snoEdit.value=e.target.id;
             console.log(e.target.id);
            

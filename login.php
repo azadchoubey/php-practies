@@ -1,6 +1,9 @@
 <?php
 session_start();
-  
+ if (isset($_SESSION["username"])){
+  header("Location:curd.php");
+}
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $user=$_POST['username'];
@@ -17,10 +20,9 @@ $RESULT= mysqli_query($conn, $sql);
 $numrows = mysqli_num_rows($RESULT);
 
 if ($numrows > 0){
-
- 
-      header("Location:curd.php");
+  session_start();
       $_SESSION["username"] = $user;
+      header("Location:curd.php");
 }
 else{
     echo"invaild login details";
