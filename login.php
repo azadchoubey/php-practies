@@ -21,7 +21,10 @@ $numrows = mysqli_num_rows($RESULT);
 
 if ($numrows > 0){
   session_start();
+
       $_SESSION["username"] = $user;
+      $_SESSION["login_time_stamp"] = time();   
+
       header("Location:curd.php");
 }
 else{
@@ -42,7 +45,7 @@ else{
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="cs.css" >
+    <link rel="stylesheet" href="sty.css" >
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
@@ -56,10 +59,10 @@ else{
         <th>Username</th>
         </TR><br>
 <tr>
-<td><input type="text"name="username" class="login" required></td></tr><br>
+<td><input type="text"name="username" class="form-control" required></td></tr><br>
 <tr> <th> Password</th><br>
 </tr>
-<tr><td><input type="text"name="password" class="login" required></td></tr><br>
+<tr><td><input type="text"name="password" class="form-control" required></td></tr><br>
 <tr> <td> <input type="submit" class="btn btn-primary mt-3" id="submit" value="Login"></button></td></tr>
 </form></div>
     <!-- Optional JavaScript; choose one of the two! -->

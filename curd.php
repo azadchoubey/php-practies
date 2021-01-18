@@ -34,28 +34,37 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">About</a>
                     </li>
-                    <li class="nav-item">
+                    
+                </ul>
+               
+            </div>
+         <p >  <?php  session_start();
+                          echo "<h6 class='sesstion' > <strong><u>Welcome:". $_SESSION['username'] ."</u></strong> </h6>";
+           ?>  </p>    <ul class="navbar-nav"> 
+    <li class="nav-item">
                         <a class="nav-link active" href="logout.php">Logout</a>
                     </li>
-                </ul>
-                <?php  session_start();
-    
-
-                echo " <h5 class='variablecolor'> <center> Welcome ".$_SESSION["username"]." </center></h5>";
-                ?>
-            </div>
-           
+</ul>
         </div>
       
-            
+    
     </nav>
 
     
     <?php
- if (!isset($_SESSION["username"])){
-    header("Location:login.php");
+    
+ if (isset($_SESSION["username"])){
+    if(time()-$_SESSION["login_time_stamp"] >60)   
+    { 
+        session_unset(); 
+        session_destroy(); 
+        header("Location:login.php"); 
+    } 
+   
  }
-
+else{
+    header("Location:login.php"); 
+}
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 if(isset($_POST['snoEdit'])){
@@ -120,14 +129,14 @@ elseif(isset($_POST['delNotes'])){
     
     
     // Check if image file is a actual image or fake image
-    
+    if(isset($_POST["submit"])) {
       if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
  
         $uploadOk = 1;
-   
+    }}
     
-      } else {
+    //   } else {
     //     echo"
     //   <div class='alert alert-danger alert-dismissible fade show' role='alert'>
     //   <center><strong>File is not an image. ! </strong> </center>
@@ -135,17 +144,18 @@ elseif(isset($_POST['delNotes'])){
     //   </div>";
 
 
-        echo "File is not an image.";
-        $uploadOk = 0; 
-      }
+    //   //  echo "File is not an image.";
+    //     $uploadOk = 0; 
+    //   } 
+
         if (file_exists($target_file)) {
 
-    //         echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-    //   <center><strong>Sorry, file already exists. ! </strong> </center>
-    //   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-    //   </div>";
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+      <center><strong>Sorry, file already exists. ! </strong> </center>
+      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div>";
 
-         echo "Sorry, file already exists.";
+       //  echo "Sorry, file already exists.";
           $uploadOk = 0;
         
         
@@ -153,68 +163,78 @@ elseif(isset($_POST['delNotes'])){
 
         // Check file size
          
-        if ( $_FILES["fileToUpload"]["size"] > 500000) {
-            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            // <center><strong>Sorry, your file is too large. ! </strong> </center>
-            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            // </div>";
+        elseif ( $_FILES["fileToUpload"]["size"] > 500000) {
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <center><strong>Sorry, your file is too large. ! </strong> </center>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>";
       
          
-           echo "Sorry, your file is too large.";
+           //echo "Sorry, your file is too large.";
           $uploadOk = 0;
         
         
         }
         
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            // <center><strong>Sorry, only JPG, JPEG, PNG & GIF files are allowed.! </strong> </center>
-            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            // </div>";
+        elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" && $videoFileType = "mp4") {
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <center><strong>Sorry, only JPG, JPEG, PNG & GIF files are allowed.! </strong> </center>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>";
+         
+        
 
-
-         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
           $uploadOk = 0;
         
         
         }
-        
+        if (empty($_FILES["fileToUpload"])) {
+            
+       
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <center><strong>Sorry, only JPG, JPEG, PNG & GIF files are alloweded.! </strong> </center>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>"; 
+            $uploadOk = 0;
+        }
+
         // Check if $uploadOk is set to 0 by an error
-        elseif ($uploadOk == 0) {
-            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            // <center><strong>Sorry, your file was not uploaded.! </strong> </center>
-            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            // </div>";
-         echo "Sorry, your file was not uploaded.";
-        
+        elseif ($uploadOk == 0 ) {
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <center><strong>Sorry, your file was not uploaded.! </strong> </center>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>";
+        // echo "Sorry, your file was not uploaded.";
+
         
         // if everything is ok, try to upload file
         } else {
           if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        //     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-        // <center><strong>Success!</strong> The file -". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"]))."has been uploaded.</center>
-        // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-        // </div>";
+            echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+        <center><strong>Success!</strong> The file -". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"]))." has been uploaded.</center>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>";
 
            
-           echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+           //echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
         
         
           } else {
-            // echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
-            // <center><strong>Sorry, there was an error uploading your file.! </strong> </center>
-            // <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            // </div>";
+            echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+            <center><strong>Sorry, there was an error uploading your file.! </strong> </center>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>";
            
-           echo "Sorry, there was an error uploading your file.";
+         //  echo "Sorry, there was an error uploading your file.";
         
         
           }
         }
     } 
-else{
+   elseif (isset($_POST['add'])){
 
 $title=$_POST['title'];
 $note=$_POST['note'];
@@ -261,12 +281,12 @@ else{
                 <label for="exampleFormControlTextarea1" class="form-label"> Take Note</label>
                 <textarea class="form-control" id="note" name="note" rows="3" required></textarea><br>
                
-                <input type="submit" class="btn btn-primary" value="Submit"></button>
+                <input type="submit" class="btn btn-primary" value="Submit" name="add" ></button>
             </form>
-            <form action="curd.php" method="post" enctype="multipart/form-data">
-  Select image to upload:
-
-  <input type="file" class="btn btn-primary" name="fileToUpload" id="fileToUpload">
+            <form action="curd.php" method="post" enctype="multipart/form-data" class="mb-3 mt-4">
+ <strong>Select image to upload:
+</strong> 
+  <input type="file" class="btn btn-primary" name="fileToUpload" id="fileToUpload" required>
   <input type="submit" class="btn btn-primary"value="Upload Image" name="upload">
   </form>
         </div>
