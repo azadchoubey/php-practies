@@ -54,7 +54,7 @@
     <?php
     
  if (isset($_SESSION["username"])){
-    if(time()-$_SESSION["login_time_stamp"] >60)   
+    if(time()-$_SESSION["login_time_stamp"] >300)   
     { 
         session_unset(); 
         session_destroy(); 
@@ -120,9 +120,14 @@ elseif(isset($_POST['delNotes'])){
     }
     elseif(isset($_POST['upload']))
     {
+       
+    $target_dir = 'uploads/'.$_SESSION['username'];
+    if(!is_dir($target_dir)){   
+        //Directory does not exist, so lets create it.
+        mkdir($target_dir, 0755);
+    }
     
-    $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+ $target_file = $target_dir.'/' .($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -370,11 +375,11 @@ if (mysqli_num_rows($disply) > 0) {
                 <input type="hidden" name="delNotes" id="delNotes">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="delTitle"name="delTitle">
+                            <input type="text" class="form-control" id="delTitle"name="delTitle" required="true" readonly="true">
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Note:</label>
-                            <textarea class="form-control" id="delnote" name="delnote"></textarea>
+                            <textarea class="form-control" id="delnote" name="delnote" required="true" readonly="true"></textarea>
                         </div>
                     
                 </div>

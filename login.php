@@ -28,7 +28,12 @@ if ($numrows > 0){
       header("Location:curd.php");
 }
 else{
-    echo"invaild login details";
+  echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+  <center><strong>invaild login details ! </strong> </center>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+  </div>";
+
+   // echo"invaild login details";
     
 }
 
@@ -55,16 +60,17 @@ else{
 
   <div class="contanior " >
   <form action="login.php" method="post" enctype="application/x-www-form-urlencoded">
-        <TR>
-        <th>Username</th>
+         <TR>
+        <th >Username</th>
         </TR><br>
 <tr>
-<td><input type="text"name="username" class="form-control" required></td></tr><br>
+<td ><input type="text"name="username" class="from" required></td></tr><br>
 <tr> <th> Password</th><br>
 </tr>
-<tr><td><input type="text"name="password" class="form-control" required></td></tr><br>
+<tr><td><input type="text"name="password" class="from" required></td></tr><br>
 <tr> <td> <input type="submit" class="btn btn-primary mt-3" id="submit" value="Login"></button></td></tr>
 </form></div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

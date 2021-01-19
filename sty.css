@@ -1,12 +1,27 @@
+.contanior{
+    margin:10%;
+    margin-left: 35%;
+    width:25%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    margin-bottom: 5px;
+}   
 
 .sesstion{
     color: black;  
     margin-right: 40%;
-    background-color: rgb(136, 172, 136);
+    background-color: rgb(230, 240, 230);
    
 }
-.contanior{
-    margin:10%;
-    margin-left: 35%;
-  
-}   
+.from{
+padding:4px;
+width: 75%;
+margin-top: 5px;
+margin-bottom: 5px;
+
+}
