@@ -1,3 +1,7 @@
+body{
+ background-color:  rgb(204, 195, 155) ;
+
+}
 .contanior{
     margin:10%;
     margin-left: 35%;
@@ -6,10 +10,12 @@
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    margin-bottom: 5px;
+    background-color: rgb(204, 195, 155)  ;
+    border: 2px solid green;
+ 
+    text-align: center;
+
+    background-origin: padding-box;
 }   
 
 .sesstion{
@@ -23,5 +29,10 @@ padding:4px;
 width: 75%;
 margin-top: 5px;
 margin-bottom: 5px;
+
+}
+.heading{
+
+  padding: 10%;
 
 }
