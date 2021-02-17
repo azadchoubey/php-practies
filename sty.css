@@ -32,10 +32,7 @@ font-size: 12px;
 
 }
 #text{
-    font-size: 13px;
-    margin-left: 410px;
-}
-#input{
-    width:350px;
-    margin-left: 450px;
+     width:420px;
+    margin-left: 460px;
+    font-size: 12px;    
 }
