@@ -20,14 +20,22 @@ font-size: 12px;
 }
 .form{ 
     margin-left: 30px;
-   
+    
 }
 #fill{
     margin-left: 450px;
-    padding:-1px;  
+    font-size: 12px;
 }.red1{
     color:red;
     font-size: 12px;
-    margin-left: 450px;
+    margin-left: 497px;
 
+}
+#text{
+    font-size: 13px;
+    margin-left: 410px;
+}
+#input{
+    width:350px;
+    margin-left: 450px;
 }
