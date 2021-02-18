@@ -5,36 +5,31 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link rel="stylesheet" href="sty.css">
     <title>Hello, world!</title>
 </head>
-
 <body>
     <div class="Heading text-center mt-4">
         <h5>Application Form For Joining</h5>
         <p class="red">All the given fields are requied starts with *</p>
     </div>
-
-
     <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
     <div class="form">
     <from id="text">
         <strong>
-            <p id="ph"> Personal Details </p>
+            <p id="ph"  > Personal Details </p>
         </strong>
         <table><tr>
             <td><b>Name</b>
-                <input type="text" id="text" requied>
+                <input type="text" id="text"  requied>
                 <p class="red1"><u>Note:</u> Name should be same as document.<br>
                     <u>Note:</u> Please do not use any prefix such Mr. or Ms etc.
                 </p>
             </td></tr>
-            <tr > <td ><b>Gender</b>
+            <tr style="margin-bottom:10px;" > <td ><b>Gender</b>
            <SELECT id ="fill" >
                   <OPTION Value="Male">Male</OPTION>
                   <OPTION Value="Female">Female</OPTION>
@@ -254,23 +249,106 @@
                   <option value="">--Select Marital--</option>
   <option value="Married">Married</option>
   <option value="Unmarried">Unmarried</option>
-  </select>
+  </select></td> </tr>
+
+  <tr > <td ><b>Physically Changed :</b>
+  <select name="Physically"  style=" margin-left: 377px;">
+ <option value="Yes">Yes</option>
+  <option value="No">No</option>
+  </td> </tr>
+  <tr > <td ><b>Community :</b>
+  <select name="Community"  style=" margin-left: 417px; margin-bottom:10px;">
+ <option value="Yes">Gerenal</option>
+  <option value="No">OBC</option>
+  <option value="No">SC/ST</option>
+  </td> </tr> </table>  
+
+   <strong>
+            <p id="ph"> Educational Qualification </p>
+        </strong>  
+        <table>  
+        <tr > <td ><b>Select Your Educational Qualification :</b>      
+        <select name="Qualification"  style=" margin-left: 275px; margin-bottom:10px;">
+        <option value="">--Select Your Qualification--</option>
+ <option value="10th">10th</option>
+  <option value="10+2">10+2</option>
+  <option value="Grauation">Grauation</option>
+  <option value="Post Grauation ">Post Grauation </option>   
+         </td> </tr> </table>  
+         <strong>
+            <p id="ph"> Address </p>
+        </strong>       
+        <table>  
+        
+        <p class="red1" style="margin-bottom:2px;"><u> Note: </u> Do not enter your name again in address flieds. </p > </td>
+        <tr > <td ><b>Line 1:</b>
+        <input type="text" id="text"  requied>
+        </td> </tr> 
+        <tr > <td ><b>Line 2:</b>
+        <input type="text" id="text"  requied>
+        </td> </tr> 
+        
+        <tr > <td ><b>Line 3:</b>
+        <input type="text" id="text"  requied>
+        </td> </tr> 
+        <tr > <td ><b>District/City:</b>
+        <input type="text" style=" margin-left: 425px;  width:420px;" requied>
+        </td> </tr> 
+        <tr > <td ><b>State/UT :</b>
+<select name=slist  style=" margin-left: 440px;">
+<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chandigarh">Chandigarh</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+<option value="Daman and Diu">Daman and Diu</option>
+<option value="Delhi">Delhi</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Lakshadweep">Lakshadweep</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Orissa">Orissa</option>
+<option value="Pondicherry">Pondicherry</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttaranchal">Uttaranchal</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="West Bengal">West Bengal</option>
+</select>
+
+<tr > <td ><b>Pincode:</b>
+        <input type="text" style=" font-size: 12px; margin-left: 447px;  width:80px; " requied>
+        </td> </tr> 
+        
+        <tr > <td ><b>Mobile No:</b>
+        <input type="text" style=" font-size: 12px; margin-left: 432px;  width:120px; " requied>
+        </td> </tr>       
+        
+      
 
 
-                </table>    
 
 
 
 
-
-
-
-        </from>
-    </div>
-
-
-
-
+        </from>  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -283,5 +361,4 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 </body>
-
 </html>
