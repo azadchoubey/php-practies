@@ -1,63 +1,3 @@
-<?php
-$msg=false;
-$addmsg=false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
-      $name= $_POST['uname'];
-      $gender=$_POST['gender'];
-      $date=$_POST['date'];
-      $fname=$_POST['fname'];
-      $mname=$_POST['mname'];
-      $nationality=$_POST['nationality'];
-      $Marital=$_POST['Marital'];
-      $physically=$_POST['Physically'];
-      $community=$_POST['Community'];
-      $qualification=$_POST['Qualification'];
-        $addline1=$_POST['line1'];
-        $addline2=$_POST['line2'];
-        $addline3=$_POST['line3'];
-        $city=$_POST['city'];
-        $state=$_POST['slist'];
-        $Pincode=$_POST['Pincode'];
-        $mobile=$_POST['mnumber'];
-        $email=$_POST['emailField'];
-        $cemail=$_POST['cemail'];
- include 'db_confiq.php';  
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else{
-$sql = "INSERT INTO `joining` (`id`, `Name`, `Gender`, `DOB`, `Father`, `Mother`, `Nationality`, `Marital`, `Physically`, `Community`, `Qualification`, `Addline1`, `Addline2`, `Addline3`, `City`, `State`, `Pincode`, `Mobile`, `Email`, `Submitdate`) VALUES (NULL, '$name', '$gender', '$date', '$fname','$mname', '$nationality', '$Marital', '$physically', '$community', '$qualification ', '$addline1', '$addline2', '$addline3', '$city', '$state', '$Pincode', '$mobile', '$email', CURRENT_TIMESTAMP)";
-
-if (mysqli_query($conn, $sql)) {
-    global  $addmsg;
-    $addmsg=true;
-    
-  } else {
-    $duplicate = mysqli_error($conn);
-        if($duplicate=="Duplicate entry 'choubeyazad@gmail.co' for key 'Email'"){
-            global $msg;
-            $msg=true;
-
-           
-        }
-
-  }
-  
-  mysqli_close($conn);
-
-
-
-
-
-    
-}
-
-}
-?>
 <!doctype html>
 <html lang="en">
 
@@ -69,61 +9,44 @@ if (mysqli_query($conn, $sql)) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="sty.css">
-    <title>Joining</title>
-</head><body>
-    
-<img src="img/home.jpg" style="width:98%;">
+    <title>Hello, world!</title>
+</head>
 
+<body>
     <div class="Heading text-center mt-4">
         <h5>Application Form For Joining</h5>
         <p class="red">All the given fields are required starts with *</p>
     </div>
     <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
-   
     <div class="form">
-    <?php
-                if($msg){
-                    echo "<p style=' color:red;
-                    font-size: 15px;
-                    margin-left: 45%;'> Email id already exists !!!</p>";
-
-                }
-                elseif($addmsg){
-                    echo "<p style=' color:green;
-                    font-size: 15px;
-                    margin-left: 45%;'> New record created successfully !!!</p>";
-
-                }
-      
-      ?>
-    <form id="text" action="form.php" method="post">
+    <form id="text" >
         <strong>
             <p id="ph"  > Personal Details </p>
         </strong>
         <table><tr>
             <td><b>Name</b>
-                <input type="text" name="uname" style=" margin-left: 455px;  width:420px;" required>
+                <input type="text" style=" margin-left: 455px;  width:420px;" required>
                 <p class="red1"><u>Note:</u> Name should be same as document.<br>
                     <u>Note:</u> Please do not use any prefix such Mr. or Ms etc.
                 </p>
             </td></tr>
             <tr style="margin-bottom:10px;" > <td ><b>Gender</b>
-           <SELECT id ="fill" name='gender' >
+           <SELECT id ="fill" >
                   <OPTION Value="Male">Male</OPTION>
                   <OPTION Value="Female">Female</OPTION>
                   <OPTION Value="Other">Other</OPTION>
                   </SELECT>            </td></tr>
                   <tr id="fill">
-                  <td  > <b>Date Of Birth</b> <input type="date" name="date" style=" margin-left: 417px;"  >
+                  <td  > <b>Date Of Birth</b> <input type="date" style=" margin-left: 417px;"  >
                   <p class="red1"><u> Note: </u> (Date Of Birth as recorded in Marticulation/Seccoundry Examnation Certificate.)</p>
                   </td>
                   </tr>
                   <tr>
-                  <td > <b>Father Name's </b> <input type="text" name='fname' style=" margin-left: 413px;  width:420px;" required>
+                  <td > <b>Father Name's </b> <input type="text"style=" margin-left: 413px;  width:420px;" required>
                   <p class="red1"><u> Note: </u> Do not use prefix such Shri or Mr etc. </p > </td>
                   </tr>
                   <tr>
-                  <td > <b>Mother Name's </b>  <input type="text" name='mname' style=" margin-left: 405px;  width:420px;" required>
+                  <td > <b>Mother Name's </b>  <input type="text"style=" margin-left: 405px;  width:420px;" required>
                   <p class="red1"><u> Note: </u> Do not use prefix such Smt or Mrs etc. </p > </td>
                   </tr>
                   <tr > <td ><b>Nationality</b>
@@ -328,6 +251,7 @@ if (mysqli_query($conn, $sql)) {
   <option value="Married">Married</option>
   <option value="Unmarried">Unmarried</option>
   </select></td> </tr>
+
   <tr > <td ><b>Physically Changed :</b>
   <select name="Physically"  style=" margin-left: 377px;">
  <option value="Yes">Yes</option>
@@ -339,6 +263,7 @@ if (mysqli_query($conn, $sql)) {
   <option value="No">OBC</option>
   <option value="No">SC/ST</option>
   </td> </tr> </table>  
+
    <strong>
             <p id="ph"> Educational Qualification </p>
         </strong>  
@@ -358,17 +283,17 @@ if (mysqli_query($conn, $sql)) {
         
         <p class="red" style="margin-bottom:2px; margin-left: 500px;"><u> Note: </u> Do not enter your name again in address flieds. </p > </td>
         <tr > <td ><b>Line 1:</b>
-        <input type="text"  name='line1' style=" margin-left: 458px;  width:420px;" required>
+        <input type="text" style=" margin-left: 458px;  width:420px;" required>
         </td> </tr> 
         <tr > <td ><b>Line 2:</b>
-        <input type="text" name='line2' style=" margin-left: 458px;   width:420px;"  required>
+        <input type="text" style=" margin-left: 458px;   width:420px;"  required>
         </td> </tr> 
         
         <tr > <td ><b>Line 3:</b>
-        <input type="text" name='line3' style=" margin-left: 458px;   width:420px;" required>
+        <input type="text" style=" margin-left: 458px;   width:420px;" required>
         </td> </tr> 
         <tr > <td ><b>District/City:</b>
-        <input type="text" name='city' style=" margin-left: 422px;   width:420px;" required>
+        <input type="text" style=" margin-left: 422px;   width:420px;" required>
         </td> </tr> 
         <tr > <td ><b>State/UT :</b>
 <select name=slist  style=" margin-left: 440px;">
@@ -408,26 +333,34 @@ if (mysqli_query($conn, $sql)) {
 <option value="Uttar Pradesh">Uttar Pradesh</option>
 <option value="West Bengal">West Bengal</option>
 </select>
+
 <tr > <td ><b>Pincode:</b>
-        <input type="number" name='Pincode' style=" font-size: 12px; margin-left: 447px;  width:80px; " required>
+        <input type="text" style=" font-size: 12px; margin-left: 447px;  width:80px; " required>
         </td> </tr> 
         
         <tr > <td ><b>Mobile No:</b>
-        <input type="number" name='mnumber' style=" font-size: 12px; margin-left: 433px;  width:150px; " required>
+        <input type="text" style=" font-size: 12px; margin-left: 433px;  width:150px; " required>
         </td> </tr>       
         <tr > <td ><b>Email id:</b> 
-        <input type="text" id="emailField" name='emailField' pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" style=" font-size: 12px; margin-left: 446px;  width:420px; " placeholder ="Enter Email id"required>
-     
-      
+        <input type="text" id="emailField" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" style=" font-size: 12px; margin-left: 446px;  width:420px; " placeholder ="Enter Email id"required>
         <tr > <td ><b> Confirm Email id:</b> 
-        <input type="text" id="cemail" name='cemail' pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" style=" font-size: 12px; margin-left: 395px;  width:420px; " required>
-      <tr> <td ><input type="submit" vaule="Submit"  id="okButton"  disabled style="margin-left:50%; margin-bottom:10px; margin-top:10px;" /> <input type="reset" >
+        <input type="text" id="cemail" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" style=" font-size: 12px; margin-left: 395px;  width:420px; " required>
+      <tr> <td ><input type="submit" vaule="submit"  id="okButton"  disabled style="margin-left:50%; margin-bottom:10px; margin-top:10px;" /> <input type="reset" >
+
+
+
+
+
+
         </form>  </div>
+
         <script>
 const signUpForm = document.getElementById('text');
 var emailField = document.getElementById('emailField');
 const okButton = document.getElementById('okButton');
 var cemail= document.getElementById('cemail');
+
+
 emailField.addEventListener('keyup',testpassword2);   
 cemail.addEventListener('keyup',testpassword2);
     function testpassword2() {
@@ -436,7 +369,9 @@ cemail.addEventListener('keyup',testpassword2);
   } else {  
     okButton.disabled = true;
   }
+
 };
+
   
 okButton.addEventListener('click', function (event) {
   signUpForm.submit();
