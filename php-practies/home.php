@@ -12,19 +12,54 @@
 <!-- Load an icon library -->
 <div class="navbar">
   <a  href="#"><i class="fa fa-fw fa-home"></i> Home</a>
-<input type="text"  class="topnav" placeholder="Search.."><i class="fa fa-fw fa-search"></i>
-   
   <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
   <div class="dropdown">
     <button class="dropbtn">Registration
     </button>
     <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <a href="form.php">Apply Form</a>
+      <a href="#">Download Admitcard</a>
     </div>
   </div>
 </div>
+<div class="countair">
+<form>
+
+<input type="text" placeholder="Username" class="form" name="Username" /><br>
+<input type="Password" placeholder="Password" class="form"  name="Password" />
+
+
+
+
+</form>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -33,7 +68,6 @@ toggle between hiding and showing the dropdown content */
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
-
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {

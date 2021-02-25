@@ -49,7 +49,11 @@ function random_strings($length_of_string) {
     $token= random_strings(10); 
 
   
-}  
+}
+
+   
+   
+   
    else {
     $duplicate = mysqli_error($conn);
         if($duplicate=="Duplicate entry '$email' for key 'Email'"){
@@ -112,13 +116,13 @@ function random_strings($length_of_string) {
                             Your Login id is - $token and Password is- $token
                             </p>";}
                         
-                            
+
                     }
 
                 }
     
       ?>
-        <form id="text" action="form.php" method="get">
+        <form id="text" action="form.php" method="post">
             <strong>
                 <p id="ph"> Personal Details </p>
             </strong>
