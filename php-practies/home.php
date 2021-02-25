@@ -24,44 +24,12 @@
 </div>
 <div class="countair">
 <form>
-
-<input type="text" placeholder="Username" class="form" name="Username" /><br>
-<input type="Password" placeholder="Password" class="form"  name="Password" />
-
-
-
-
+  <p style="margin-top: 35px; text-align: center; font-size: 30px;"> Login Your Account </p>
+<input type="text" placeholder="Username" style="margin-top: 10px;" class="form" name="Username" /><br>
+<input type="Password" placeholder="Password" class="form"  name="Password" /><br>
+<input type="submit" Value="Login" class="buttom"  name="submit"/>
 </form>
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */

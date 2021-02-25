@@ -131,6 +131,27 @@
     .form{ 
 
       padding: 10px;
-      width:120px;
+     
+      background-color: transparent;
+      border: 0px solid;
+      border-bottom: 1px solid black;
+      color: #CCC;
+      width: 220px;
+     margin-left: 30%;
     
+    }.buttom{
+      background-color:rgb(56, 7, 121);
+      padding: 10px;
+      margin-left: 30%;
+      color: #CCC;
+      width:200px;
+      margin-bottom: 55px;
+      text-decoration: solid;
+    }
+    .countair{
+      border: 1px solid rgb(221, 50, 50);
+      margin-left: 900px;
+      margin-right:55px;
+      margin-top: 55px;
+   
     }

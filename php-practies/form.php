@@ -32,6 +32,8 @@ if (!$conn) {
 
 $sql = "INSERT INTO `joining` (`id`, `Name`, `Gender`, `DOB`, `Father`, `Mother`, `Marital`, `Physically`, `Community`, `Qualification`, `Addline1`, `Addline2`, `Addline3`, `City`, `State`, `Pincode`, `Mobile`, `Email`, `Submitdate`) VALUES (NULL, '$name', '$gender', '$date', '$fname','$mname', '$Marital', '$physically', '$community', '$qualification ', '$addline1', '$addline2', '$addline3', '$city', '$state', '$Pincode', '$mobile', '$email', CURRENT_TIMESTAMP)";
 $result=mysqli_query($conn, $sql);
+$duplicate = mysqli_error($conn);
+echo "$duplicate";
 if ($result) {
     global  $addmsg;
     $addmsg=true;
@@ -108,11 +110,11 @@ function random_strings($length_of_string) {
                         die("Connection failed: " . mysqli_connect_error());
                     } else{
  
-                        $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$token', '$token', CURRENT_TIMESTAMP)";                           
-                        $result=mysqli_query($conn, $sql);
-                        if($result){echo "<p style=' color:green;
+                        $add = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$token', '$token', CURRENT_TIMESTAMP)";                           
+                        $result1=mysqli_query($conn, $add);
+                        if($result1){echo "<p style=' color:green;
                             font-size: 15px;
-                            margin-left: 45%;'> Application is submited successfully <br>
+                            margin-left: 43%;'> Application is submited successfully <br>
                             Your Login id is - $token and Password is- $token
                             </p>";}
                         
