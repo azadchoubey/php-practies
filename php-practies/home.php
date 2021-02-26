@@ -1,3 +1,52 @@
+<?php
+$loginbtn =true;
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $username=$_POST['Username'];
+  $password=$_POST['Password'];
+  
+require 'db_confiq.php';
+$sql = "SELECT * FROM `user_login` WHERE `Username`= '$username'";
+$RESULT= mysqli_query($conn, $sql);
+$numrows = mysqli_num_rows($RESULT);
+  if ($numrows > 0){
+    while($row = mysqli_fetch_assoc($RESULT))
+    { if (password_verify($password,$row['Password'] )){
+      session_start();
+  
+      $_SESSION["username"] = $user;
+      $_SESSION["login_time_stamp"] = time();   
+          $loginbtn=false;
+    }
+    else{
+      echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+      <center><strong>invaild password ! </strong> </center>
+      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+      </div>";
+
+    }
+    }
+  }else {
+    echo"<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+    <center><strong>invaild  username ! </strong> </center>
+    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>";
+  
+      
+  }
+
+
+
+}
+
+
+
+
+
+
+?>
+
+
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -22,14 +71,26 @@
     </div>
   </div>
 </div>
-<div class="countair">
-<form>
-  <p style="margin-top: 35px; text-align: center; font-size: 30px;"> Login Your Account </p>
-<input type="text" placeholder="Username" style="margin-top: 10px;" class="form" name="Username" /><br>
-<input type="Password" placeholder="Password" class="form"  name="Password" /><br>
-<input type="submit" Value="Login" class="buttom"  name="submit"/>
-</form>
-</div>
+<?php
+
+if($loginbtn){
+  echo'<div class="countair">
+  <form action="home.php" method="post">
+    <p style="margin-top: 35px; text-align: center; font-size: 30px;"> Login Your Account </p>
+   
+  <input type="text" placeholder="Username" style="margin-top: 10px;" class="form" name="Username" /><br>
+  <input type="Password" placeholder="Password" class="form"  name="Password" /><br>
+  <input type="submit" Value="Login" class="buttom"  name="submit"/>
+  </form>
+  </div>';
+  
+
+}
+
+
+?>
+
+
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
