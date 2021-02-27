@@ -15,7 +15,7 @@
           
           
   }
-  .form{ 
+  .form1{ 
       margin-left: 30px;
       border-color: black;
       border: 1px solid black;
@@ -137,16 +137,16 @@
       border-bottom: 1px solid black;
       color: #CCC;
       width: 220px;
-     margin-left: 30%;
+     margin-left: 20%;
     
     }.buttom{
       background-color:rgb(56, 7, 121);
       padding: 10px;
-      margin-left: 30%;
+      margin-left: 20%;
       color: #CCC;
       width:200px;
       margin-bottom: 55px;
-      text-decoration: solid;
+      text-transform:5px;
     }
     .countair{
       border: 1px solid rgb(221, 50, 50);

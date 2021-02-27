@@ -32,24 +32,22 @@ if (!$conn) {
 
 $sql = "INSERT INTO `joining` (`id`, `Name`, `Gender`, `DOB`, `Father`, `Mother`, `Marital`, `Physically`, `Community`, `Qualification`, `Addline1`, `Addline2`, `Addline3`, `City`, `State`, `Pincode`, `Mobile`, `Email`, `Submitdate`) VALUES (NULL, '$name', '$gender', '$date', '$fname','$mname', '$Marital', '$physically', '$community', '$qualification ', '$addline1', '$addline2', '$addline3', '$city', '$state', '$Pincode', '$mobile', '$email', CURRENT_TIMESTAMP)";
 $result=mysqli_query($conn, $sql);
-$duplicate = mysqli_error($conn);
-echo "$duplicate";
 if ($result) {
     global  $addmsg;
     $addmsg=true;
-// This function will return a random 
-// string of specified length 
-function random_strings($length_of_string) { 
-      global $name;
-    // md5 the timestamps and returns substring 
-    // of specified length 
-    return substr(md5($name), 0, $length_of_string); 
-} 
+// // This function will return a random 
+// // string of specified length 
+// function random_strings($length_of_string) { 
+//       global $name;
+//     // md5 the timestamps and returns substring 
+//     // of specified length 
+//     return substr(password_hash($name, PASSWORD_BCRYPT), 0, $length_of_string); 
+// } 
   
-// This function will generate  
-// Random string of length 10 
-    $token= random_strings(10); 
-
+// // This function will generate  
+// // Random string of length 10 
+//     $token= random_strings(10); 
+ 
   
 }
 
@@ -93,35 +91,35 @@ function random_strings($length_of_string) {
     </div>
     <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
 
-    <div class="form">
+    <div class="form1">
         <?php
                 if($msg){
                     echo "<p style=' color:red;
                     font-size: 15px;
-                    margin-left: 45%;'> Email id already exists !!!</p>";
+                    margin-left: 42%;'> Email id already exists !!!</p>";
 
                 }
                 elseif($addmsg){
                     
-                    include 'db_confiq.php';  
-                    // Create connection
-                    $conn = mysqli_connect($servername, $username, $password, $database);
-                    if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    } else{
- 
-                        $add = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$token', '$token', CURRENT_TIMESTAMP)";                           
-                        $result1=mysqli_query($conn, $add);
-                        if($result1){echo "<p style=' color:green;
+                    // include 'db_confiq.php';  
+                    // // Create connection
+                    // $conn = mysqli_connect($servername, $username, $password, $database);
+                    // if (!$conn) {
+                    //     die("Connection failed: " . mysqli_connect_error());
+                    // } else{
+                    //         global $mypassword;
+                    //     $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
+                    //     $result=mysqli_query($conn, $sql);
+                    //     if($result){
+                          
+                         echo "<p style=' color:green;
                             font-size: 15px;
-                            margin-left: 43%;'> Application is submited successfully <br>
-                            Your Login id is - $token and Password is- $token
-                            </p>";}
+                            margin-left: 42%;'> Application is submited successfully <br>
+                            </p>";
                         
 
                     }
 
-                }
     
       ?>
         <form id="text" action="form.php" method="post">
