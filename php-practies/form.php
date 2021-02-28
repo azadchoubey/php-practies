@@ -78,12 +78,17 @@ if ($result) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="sty.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Joining</title>
+    <?php
+include 'navbar.php';
+
+?>
 </head>
 
 <body onload="setStates();">
 
-    <img src="img/home.jpg" style="width:98%;">
 
     <div class="Heading text-center mt-4">
         <h5>Application Form For Joining</h5>
