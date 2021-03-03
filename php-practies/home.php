@@ -1,16 +1,16 @@
 <?php
 $loginbtn =true;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $username=$_POST['Username'];
-  $password=$_POST['Password'];
+  $user=$_POST['Username'];
+  $pass=$_POST['Password'];
   
 require 'db_confiq.php';
-$sql = "SELECT * FROM `user_login` WHERE `Username`= '$username'";
+$sql = "SELECT * FROM `user_login` WHERE `Username`= '$user'";
 $RESULT= mysqli_query($conn, $sql);
 $numrows = mysqli_num_rows($RESULT);
   if ($numrows > 0){
     while($row = mysqli_fetch_assoc($RESULT))
-    { if (password_verify($password,$row['Password'] )){
+    { if ($pass==$row['Password'] ){
       session_start();
   
       $_SESSION["username"] = $user;

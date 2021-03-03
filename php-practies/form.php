@@ -35,18 +35,18 @@ $result=mysqli_query($conn, $sql);
 if ($result) {
     global  $addmsg;
     $addmsg=true;
-// // This function will return a random 
-// // string of specified length 
-// function random_strings($length_of_string) { 
-//       global $name;
-//     // md5 the timestamps and returns substring 
-//     // of specified length 
-//     return substr(password_hash($name, PASSWORD_BCRYPT), 0, $length_of_string); 
-// } 
+// This function will return a random 
+// string of specified length 
+function random_strings($length_of_string) { 
+      global $name;
+    // md5 the timestamps and returns substring 
+    // of specified length 
+    return substr(md5($name), 0, $length_of_string); 
+} 
   
-// // This function will generate  
-// // Random string of length 10 
-//     $token= random_strings(10); 
+// This function will generate  
+// Random string of length 10 
+    $token= random_strings(10); 
  
   
 }
@@ -106,26 +106,33 @@ include 'navbar.php';
                 }
                 elseif($addmsg){
                     
-                    // include 'db_confiq.php';  
-                    // // Create connection
-                    // $conn = mysqli_connect($servername, $username, $password, $database);
-                    // if (!$conn) {
-                    //     die("Connection failed: " . mysqli_connect_error());
-                    // } else{
-                    //         global $mypassword;
-                    //     $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
-                    //     $result=mysqli_query($conn, $sql);
-                    //     if($result){
-                          
-                         echo "<p style=' color:green;
-                            font-size: 15px;
-                            margin-left: 42%;'> Application is submited successfully <br>
-                            </p>";
+                    include 'db_confiq.php';  
+                    // Create connection
+                    $conn = mysqli_connect($servername, $username, $password, $database);
+                    if (!$conn) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    } else{
                         
+                        $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
+                        $result=mysqli_query($conn, $sql);
+                        if($result){
+                          
+                         
+                        
+                            $to_email =  $email;
+                            $subject = "Welcome to Upsc Registration";
+                            $body = "Hi $name Your Login ID -:  $email and password is:- $token" ;
+                            $headers = "From: azad";
 
-                    }
+                            if (mail($to_email, $subject, $body, $headers)) {
+                                echo "<p style=' color:green;
+                                font-size: 15px;
+                                margin-left: 42%;'> Application is submited successfully. plese check your Email id:- $email <br>
+                                </p>" ;
+                                } else {
+                                    echo "Email sending failed..."; }
 
-    
+                                }}}
       ?>
         <form id="text" action="form.php" method="post">
             <strong>
