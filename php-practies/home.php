@@ -1,16 +1,25 @@
 <?php
-$loginbtn =true;
+if(!isset($_SESSION["username"]))
+{ 
+  $loginbtn=true;
+
+}
+else{
+  $loginbtn =false;
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $user=$_POST['Username'];
   $pass=$_POST['Password'];
-  
 require 'db_confiq.php';
-$sql = "SELECT * FROM `user_login` WHERE `Username`= '$user'";
+$sql = "SELECT * FROM `user_login` WHERE `Username`='$user'";
 $RESULT= mysqli_query($conn, $sql);
 $numrows = mysqli_num_rows($RESULT);
+
+
   if ($numrows > 0){
     while($row = mysqli_fetch_assoc($RESULT))
-    { if ($pass==$row['Password'] ){
+    { if ($pass==$row['Password']){
       session_start();
   
       $_SESSION["username"] = $user;
@@ -37,51 +46,50 @@ $numrows = mysqli_num_rows($RESULT);
 
 
 }
-
-
-
-
-
-
 ?>
 
-
-<html>
+<!doctype html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="sty.css">
     <title>Home</title>
-</head>
+</head><img src="img/home.jpg" style="width:100%;">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body> 
-  <?php
-  include 'navbar.php';
-  
-  ?>
+    <title>Home</title>
+</head> 
 
-<?php
+<body> 
+<!-- Load an icon library -->
+<div class="navbar">
+  <a  href="home.php"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+  <div class="dropdown">
+    <button class="dropbtn">Registration
+    </button>
+    <div class="dropdown-content">
+      <a href="form.php">Apply Form</a>
+      <a href="#">Download Admitcard</a>
+    </div>
+  </div>
+</div>
+<?php 
 
 if($loginbtn){
-  echo'<div class="countair">
-  <form action="home.php" method="post">
-    <p style="margin-top: 35px; text-align: center; font-size: 30px;"> Login Your Account </p>
-   
-  <input type="text" placeholder="Username" style="margin-top: 10px;" class="form" name="Username" /><br>
-  <input type="Password" placeholder="Password" class="form"  name="Password" /><br>
-  <input type="submit" Value="Login" class="buttom"  name="submit"/>
-  </form>
-  </div>';
-  
+echo'<div class="countair">
+<form action="home.php" method="post">
+  <p style="margin-top: 35px; text-align: center; font-size: 30px;"> Login Your Account </p>
+<input type="text" placeholder="Username" style="margin-top: 10px;" class="form" name="Username" /><br>
+<input type="Password" placeholder="Password" class="form"  name="Password" /><br>
+<input type="submit" Value="Login" class="buttom"  name="submit"/>
+</form>
+</div>';
 
 }
-
-
 ?>
-
 
 
     <!-- Optional JavaScript -->
@@ -95,5 +103,25 @@ if($loginbtn){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>

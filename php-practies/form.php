@@ -74,21 +74,27 @@ function random_strings($length_of_string) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="sty.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Joining</title>
-    <?php
-include 'navbar.php';
-
-?>
+    <title>Home</title>
+</head><img src="img/home.jpg" style="width:100%;">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="setStates();">
 
+<div class="navbar">
+  <a  href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+  <div class="dropdown">
+    <button class="dropbtn">Registration
+    </button>
+    <div class="dropdown-content">
+      <a href="form.php">Apply Form</a>
+      <a href="#">Download Admitcard</a>
+    </div>
+  </div>
+</div>
 
     <div class="Heading text-center mt-4">
         <h5>Application Form For Joining</h5>
@@ -98,41 +104,43 @@ include 'navbar.php';
 
     <div class="form1">
         <?php
-                if($msg){
-                    echo "<p style=' color:red;
-                    font-size: 15px;
-                    margin-left: 42%;'> Email id already exists !!!</p>";
+               if($msg){
+                echo "<p style=' color:red;
+                font-size: 15px;
+                margin-left: 42%;'> Email id already exists !!!</p>";
 
-                }
-                elseif($addmsg){
+            }
+            elseif($addmsg){
+                
+                include 'db_confiq.php';  
+                // Create connection
+                $conn = mysqli_connect($servername, $username, $password, $database);
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                } else{
                     
-                    include 'db_confiq.php';  
-                    // Create connection
-                    $conn = mysqli_connect($servername, $username, $password, $database);
-                    if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    } else{
-                        
-                        $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
-                        $result=mysqli_query($conn, $sql);
-                        if($result){
-                          
-                         
-                        
-                            $to_email =  $email;
-                            $subject = "Welcome to Upsc Registration";
-                            $body = "Hi $name Your Login ID -:  $email and password is:- $token" ;
-                            $headers = "From: azad";
+                    $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
+                    $result=mysqli_query($conn, $sql);
+                    if($result){
+                      
+                     
+                    
+                        $to_email =  $email;
+                        $subject = "Welcome to Upsc Registration";
+                        $body = "Hi $name Your Login ID -:  $email and password is:- $token" ;
+                        $headers = "From: azad";
 
-                            if (mail($to_email, $subject, $body, $headers)) {
-                                echo "<p style=' color:green;
-                                font-size: 15px;
-                                margin-left: 42%;'> Application is submited successfully. plese check your Email id:- $email <br>
-                                </p>" ;
-                                } else {
-                                    echo "Email sending failed..."; }
+                        if (mail($to_email, $subject, $body, $headers)) {
+                            echo "<p style=' color:green;
+                            font-size: 15px;
+                            margin-left: 35%;'> Application is submited successfully. plese check your Email id:- $email <br>
+                            </p>" ;
+                            } else {
+                                echo "Email sending failed..."; }
 
-                                }}}
+                            }}}
+
+    
       ?>
         <form id="text" action="form.php" method="post">
             <strong>
