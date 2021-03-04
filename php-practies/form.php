@@ -67,24 +67,24 @@ function random_strings($length_of_string) {
 
 }
 ?>
-<!doctype html>
+
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="sty.css">
-    <title>Home</title>
-</head><img src="img/home.jpg" style="width:100%;">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <img src="img/home.jpg" style="width:100%;">
+
+    <title>Fill Form</title>
 </head>
 
 <body onload="setStates();">
 
 <div class="navbar">
-  <a  href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a  href="home.php"><i class="fa fa-fw fa-home"></i> Home</a>
   <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
   <div class="dropdown">
     <button class="dropbtn">Registration
@@ -95,9 +95,8 @@ function random_strings($length_of_string) {
     </div>
   </div>
 </div>
-
-    <div class="Heading text-center mt-4">
-        <h5>Application Form For Joining</h5>
+<div class="Heading text-center mt-4">
+ <h5>Application Form For Joining</h5>
         <p class="red">All the given fields are required starts with *</p>
     </div>
     <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
