@@ -50,14 +50,14 @@ $numrows = mysqli_num_rows($RESULT);
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="sty.css">
     <title>Home</title>
-</head><img src="img/home.jpg" style="width:100%;">
+<img src="img/home.jpg" style="width:100%;">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Home</title>
+
 </head>
 
 <body>
@@ -73,8 +73,8 @@ $numrows = mysqli_num_rows($RESULT);
                 <a href="#">Download Admit Card</a>
             </div>
         </div>
-        <?php if(isset($_SESSION["username"])){ echo "<a href='logout.php' style='margin-left:1100px;'>Logout
-            </a>} ";} ?>
+        <?php if(isset($_SESSION["username"])){ echo "<a href='logout.php' style='margin-left:940px;'>Logout
+            </a> "; } ?>
     </div> 
     <?php 
 

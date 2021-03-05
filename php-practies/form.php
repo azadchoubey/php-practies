@@ -67,18 +67,19 @@ function random_strings($length_of_string) {
 
 }
 ?>
-
+<!doctype html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
-    <!-- <meta charset="utf-8"> -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="sty.css">
-    <img src="img/home.jpg" style="width:100%;">
+    <title>Fill</title>
+<img src="img/home.jpg" style="width:100%;">
 
-    <title>Fill Form</title>
+
 </head>
 
 <body onload="setStates();">
@@ -91,15 +92,16 @@ function random_strings($length_of_string) {
     </button>
     <div class="dropdown-content">
       <a href="form.php">Apply Form</a>
-      <a href="#">Download Admitcard</a>
+      <a href="#">Download Admit card</a>
     </div>
   </div>
 </div>
-<div class="Heading text-center mt-4">
- <h5>Application Form For Joining</h5>
+
+    <div style="text-align :center;">
+        <h2>Application Form For Joining</h2>
         <p class="red">All the given fields are required starts with *</p>
     </div>
-    <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
+    <h5 class="bord" > <strong><center>Part-1 Registration</center> </strong></h5>
 
     <div class="form1">
         <?php
