@@ -1,4 +1,7 @@
 <?php
+session_start();
+$emailid=$_SESSION["emailField"];
+
 $msg=false;
 $addmsg=false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -30,12 +33,11 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } else{
 
-$sql = "INSERT INTO `joining` (`id`, `Name`, `Gender`, `DOB`, `Father`, `Mother`, `Marital`, `Physically`, `Community`, `Qualification`, `Addline1`, `Addline2`, `Addline3`, `City`, `State`, `Pincode`, `Mobile`, `Email`, `Submitdate`) VALUES (NULL, '$name', '$gender', '$date', '$fname','$mname', '$Marital', '$physically', '$community', '$qualification ', '$addline1', '$addline2', '$addline3', '$city', '$state', '$Pincode', '$mobile', '$email', CURRENT_TIMESTAMP)";
+$sql = "UPDATE INTO `joining` (`id`, `Name`, `Gender`, `DOB`, `Father`, `Mother`, `Marital`, `Physically`, `Community`, `Qualification`, `Addline1`, `Addline2`, `Addline3`, `City`, `State`, `Pincode`, `Mobile`, `Email`, `Submitdate`) VALUES (NULL, '$name', '$gender', '$date', '$fname','$mname', '$Marital', '$physically', '$community', '$qualification ', '$addline1', '$addline2', '$addline3', '$city', '$state', '$Pincode', '$mobile', '$email', CURRENT_TIMESTAMP)";
 $result=mysqli_query($conn, $sql);
 if ($result) {
     global  $addmsg;
     $addmsg=true;
- 
 // This function will return a random 
 // string of specified length 
 function random_strings($length_of_string) { 
@@ -54,14 +56,7 @@ function random_strings($length_of_string) {
 
    
    
-   
-   else {
-    $duplicate = mysqli_error($conn);
-        if($duplicate=="Duplicate entry '$email' for key 'Email'"){
-            global $msg;
-            $msg=true;      
-        }
-  } 
+
   mysqli_close($conn);
     
 }
@@ -121,28 +116,50 @@ function random_strings($length_of_string) {
                     die("Connection failed: " . mysqli_connect_error());
                 } else{
                     
-                    session_start();
-                    $_SESSION["emailField"] = $email;
-                    $_SESSION["login_time_stamp"] = time();   
-                  
+                    $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
+                    $result=mysqli_query($conn, $sql);
+                    if($result){
                       
-                        header("Location: confrom.php");
-                               
+                     
+                    
+                        $to_email =  $email;
+                        $subject = "Welcome to Upsc Registration";
+                        $body = "Hi $name Your Login ID -:  $email and password is:- $token" ;
+                        $headers = "From: azad";
 
-                   
-                   
-                        }}
+                        if (mail($to_email, $subject, $body, $headers)) {
+                            echo "<p style=' color:green;
+                            font-size: 15px;
+                            margin-left: 35%;'> Application is submited successfully. plese check your Email id:- $email <br>
+                            </p>" ;
+                            } else {
+                                echo "Email sending failed..."; }
+
+                            }}}
 
     
       ?>
         <form id="text" action="form.php" method="post">
-            <strong>
+          <?php 
+          
+          require 'db_confiq.php';
+          $sql = "SELECT * FROM `joining` WHERE `Email`='$emailid'";
+          $disply = mysqli_query($conn, $sql);
+      
+          if($disply){
+          while ($row = mysqli_fetch_array($disply)) {
+
+?>
+
+        
+          <strong>
                 <p id="ph"> Personal Details </p>
             </strong>
             <table>
                 <tr>
+
                     <td><b>Name</b>
-                        <input type="text" name="uname" style=" margin-left: 455px;  width:420px;" required>
+                        <input type="text" name="uname" value='<?php echo $row['Name'];?> ' style=" margin-left: 455px;  width:420px;" disabled>
                         <p class="red1"><u>Note:</u> Name should be same as document.<br>
                             <u>Note:</u> Please do not use any prefix such Mr. or Ms etc.
                         </p>
@@ -150,15 +167,13 @@ function random_strings($length_of_string) {
                 </tr>
                 <tr style="margin-bottom:10px;">
                     <td><b>Gender</b>
-                        <SELECT id="fill" name='gender'>
-                            <OPTION Value="Male">Male</OPTION>
-                            <OPTION Value="Female">Female</OPTION>
-                            <OPTION Value="Other">Other</OPTION>
-                        </SELECT>
+                        <SELECT id="fill" disabled name='gender'>
+                           <option ><?php echo $row['Gender'];?></option>
+                          
                     </td>
                 </tr>
                 <tr id="fill">
-                    <td> <b>Date Of Birth</b> <input type="date" name="date" style=" margin-left: 417px;">
+                    <td> <b>Date Of Birth</b> <input  name="date" value='<?php echo $row['DOB'];?> ' disabled style=" margin-left: 417px;">
                         <p class="red1"><u> Note: </u> (Date Of Birth as recorded in Marticulation/Seccoundry Examnation
                             Certificate.)</p>
                     </td>
@@ -180,24 +195,21 @@ function random_strings($length_of_string) {
                     <td><b>Marital Status</b>
                         <select name="Marital" style=" margin-left: 413px;">
                             <option value="">--Select Marital--</option>
-                            <option value="Married">Married</option>
-                            <option value="Unmarried">Unmarried</option>
+                            
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><b>Physically Changed :</b>
                         <select name="Physically" style=" margin-left: 377px;">
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                          
                     </td>
                 </tr>
                 <tr>
                     <td><b>Community :</b>
                         <select name="Community" style=" margin-left: 417px; margin-bottom:10px;">
                             <option value="Yes">Gerenal</option>
-                            <option value="No">OBC</option>
-                            <option value="No">SC/ST</option>
+                          
                     </td>
                 </tr>
             </table>
@@ -209,10 +221,7 @@ function random_strings($length_of_string) {
                     <td><b>Select Your Educational Qualification :</b>
                         <select name="Qualification" style=" margin-left: 275px; margin-bottom:10px;">
                             <option value="">--Select Your Qualification--</option>
-                            <option value="10th">10th</option>
-                            <option value="10+2">10+2</option>
-                            <option value="Grauation">Grauation</option>
-                            <option value="Post Grauation ">Post Grauation </option>
+                        
                     </td>
                 </tr>
             </table>
@@ -243,26 +252,8 @@ function random_strings($length_of_string) {
 
                 <tr>
                     <td><b>State/UT :</b>
-                        <script>
-                        var states = new Array();
-                        states['India'] = new Array('Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
-                            'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir',
-                            'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
-                            'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim',
-                            'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'WestBengal',
-                            'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli', 'Daman and Diu',
-                            'Lakshadweep', 'Puducherry');
+                      
 
-                        function setStates() {
-                            var newOptions = states['India'];
-                            var newValues = states['India'];
-                            selectField = document.getElementById("state");
-                            selectField.options.length = 0;
-                            for (i = 0; i < newOptions.length; i++) {
-                                selectField.options[selectField.length] = new Option(newOptions[i], newValues[i]);
-                            }
-                        }
-                        </script>
 
                         <select name=slist id="state" style=" margin-left: 438px;">
                             <option value=""></option>
@@ -293,34 +284,11 @@ function random_strings($length_of_string) {
 
 
                 <tr>
-                    <td><b> Confirm Email id:</b>
-                        <input type="text" id="cemail" name='cemail' pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
-                            style=" font-size: 12px; margin-left: 395px;  width:420px; " required>
-                <tr>
                     <td><input type="submit" vaule="Submit" id="okButton" disabled
                             style="margin-left:50%; margin-bottom:10px; margin-top:10px;" /> <input type="reset">
-        </form>
+  <?php  }}?>  </form> 
     </div>
-    <script>
-    const signUpForm = document.getElementById('text');
-    var emailField = document.getElementById('emailField');
-    const okButton = document.getElementById('okButton');
-    var cemail = document.getElementById('cemail');
-    emailField.addEventListener('keyup', testpassword2);
-    cemail.addEventListener('keyup', testpassword2);
-
-    function testpassword2() {
-        if (emailField.value == cemail.value) {
-            okButton.disabled = false;
-        } else {
-            okButton.disabled = true;
-        }
-    };
-
-    okButton.addEventListener('click', function(event) {
-        signUpForm.submit();
-    });
-    </script>
+ 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

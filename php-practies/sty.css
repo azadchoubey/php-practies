@@ -82,7 +82,7 @@
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #f9f9f9;
+      background-color:  #333 ;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
@@ -90,7 +90,7 @@
     
     .dropdown-content a {
       float: none;
-      color: black;
+      color: white;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
@@ -98,7 +98,7 @@
     }
     
     .dropdown-content a:hover {
-      background-color: #ddd;
+      background-color:  #333;
     }
     
     .dropdown:hover .dropdown-content {
@@ -124,7 +124,7 @@
         padding: 14px;
       }
       .topnav input[type=text] {
-        border: 1px solid #ccc;
+        border: 1px solid #333;
         padding: 5px;
       }
     }
@@ -135,7 +135,7 @@
       background-color: transparent;
       border: 0px solid;
       border-bottom: 1px solid black;
-      color: #CCC;
+ 
       width: 220px;
      margin-left: 20%;
     
