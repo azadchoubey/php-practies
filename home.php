@@ -1,5 +1,13 @@
 <?php
-$loginbtn =true;
+session_start();
+if(!isset($_SESSION["username"]))
+{ 
+  $loginbtn=true;
+}
+else{
+  $loginbtn =false;
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $user=$_POST['Username'];
   $pass=$_POST['Password'];
@@ -12,9 +20,9 @@ $numrows = mysqli_num_rows($RESULT);
   if ($numrows > 0){
     while($row = mysqli_fetch_assoc($RESULT))
     { if ($pass==$row['Password']){
-      session_start();
-  
+      
       $_SESSION["username"] = $user;
+     // note current time 
       $_SESSION["login_time_stamp"] = time();   
           $loginbtn=false;
     }
@@ -34,9 +42,6 @@ $numrows = mysqli_num_rows($RESULT);
   
       
   }
-
-
-
 }
 ?>
 
@@ -45,18 +50,34 @@ $numrows = mysqli_num_rows($RESULT);
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="sty.css">
     <title>Home</title>
-</head><img src="img/home.jpg" style="width:100%;">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<img src="img/home.jpg" style="width:100%;">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body> 
-<!-- Load an icon library -->
 
-<?php 
+</head>
+
+<body>
+    <!-- Load an icon library -->
+    <div class="navbar">
+        <a href="home.php"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+        <div class="dropdown">
+            <button class="dropbtn">Registration
+            </button>
+            <div class="dropdown-content">
+                <a href="form.php">Apply Form</a>
+                <a href="#">Download Admit Card</a>
+            </div>
+        </div>
+        <?php if(isset($_SESSION["username"])){ echo "<a href='logout.php' style='margin-left:940px;'>Logout
+            </a> "; } ?>
+    </div> 
+    <?php 
+
 if($loginbtn){
 echo'<div class="countair">
 <form action="home.php" method="post">
@@ -82,5 +103,26 @@ echo'<div class="countair">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script>
+    /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+    </script>
 </body>
+
 </html>

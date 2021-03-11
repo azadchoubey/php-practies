@@ -35,18 +35,19 @@ $result=mysqli_query($conn, $sql);
 if ($result) {
     global  $addmsg;
     $addmsg=true;
-// // This function will return a random 
-// // string of specified length 
-// function random_strings($length_of_string) { 
-//       global $name;
-//     // md5 the timestamps and returns substring 
-//     // of specified length 
-//     return substr(password_hash($name, PASSWORD_BCRYPT), 0, $length_of_string); 
-// } 
+ 
+// This function will return a random 
+// string of specified length 
+function random_strings($length_of_string) { 
+      global $name;
+    // md5 the timestamps and returns substring 
+    // of specified length 
+    return substr(md5($name), 0, $length_of_string); 
+} 
   
-// // This function will generate  
-// // Random string of length 10 
-//     $token= random_strings(10); 
+// This function will generate  
+// Random string of length 10 
+    $token= random_strings(10); 
  
   
 }
@@ -74,51 +75,63 @@ if ($result) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="sty.css">
-    <title>Joining</title>
+    <title>Fill</title>
+<img src="img/home.jpg" style="width:100%;">
+
+
 </head>
 
 <body onload="setStates();">
 
-    <img src="img/home.jpg" style="width:98%;">
+<div class="navbar">
+  <a  href="home.php"><i class="fa fa-fw fa-home"></i> Home</a>
+  <a href="#"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+  <div class="dropdown">
+    <button class="dropbtn">Registration
+    </button>
+    <div class="dropdown-content">
+      <a href="form.php">Apply Form</a>
+      <a href="#">Download Admit card</a>
+    </div>
+  </div>
+</div>
 
-    <div class="Heading text-center mt-4">
-        <h5>Application Form For Joining</h5>
+    <div style="text-align :center;">
+        <h2>Application Form For Joining</h2>
         <p class="red">All the given fields are required starts with *</p>
     </div>
-    <h6 class="bord text-center"> <strong>Part-1 Registration </strong></h6>
+    <h5 class="bord" > <strong><center>Part-1 Registration</center> </strong></h5>
 
     <div class="form1">
         <?php
-                if($msg){
-                    echo "<p style=' color:red;
-                    font-size: 15px;
-                    margin-left: 42%;'> Email id already exists !!!</p>";
+               if($msg){
+                echo "<p style=' color:red;
+                font-size: 15px;
+                margin-left: 42%;'> Email id already exists !!!</p>";
 
-                }
-                elseif($addmsg){
+            }
+            elseif($addmsg){
+                
+                include 'db_confiq.php';  
+                // Create connection
+                $conn = mysqli_connect($servername, $username, $password, $database);
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                } else{
                     
-                    // include 'db_confiq.php';  
-                    // // Create connection
-                    // $conn = mysqli_connect($servername, $username, $password, $database);
-                    // if (!$conn) {
-                    //     die("Connection failed: " . mysqli_connect_error());
-                    // } else{
-                    //         global $mypassword;
-                    //     $sql = "INSERT INTO `user_login` (`Username`, `Password`, `Time`) VALUES ('$email', '$token', CURRENT_TIMESTAMP)";                           
-                    //     $result=mysqli_query($conn, $sql);
-                    //     if($result){
-                          
-                         echo "<p style=' color:green;
-                            font-size: 15px;
-                            margin-left: 42%;'> Application is submited successfully <br>
-                            </p>";
-                        
+                    session_start();
+                    $_SESSION["emailField"] = $email;
+                    $_SESSION["login_time_stamp"] = time();   
+                  
+                      
+                        header("Location: confrom.php");
+                               
 
-                    }
+                   
+                   
+                        }}
 
     
       ?>
